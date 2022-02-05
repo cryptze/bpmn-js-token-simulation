@@ -657,6 +657,54 @@ describe('simulator', function() {
   });
 
 
+  describe('inclusive gateway', function() {
+
+    verify('inclusive-gateway-sync', (fixture) => {
+
+      // given
+      setConfig(element('F_GATE'), {
+        activeOutgoing: [ element('Flow_3'), element('Flow_5') ]
+      });
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+    verify('inclusive-gateway-single-token-pass-through', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-default-flow', (fixture) => {
+
+      // given
+      setConfig(element('F_GATE'), {
+        activeOutgoing: [ element('Flow_4') ]
+      });
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+  });
+
+
   describe('end event', function() {
 
     verify('end-event', (fixture) => {

@@ -21,8 +21,10 @@ describe('modeler extension', function() {
     const diagram = require('./simple.bpmn');
 
     beforeEach(bootstrapModeler(diagram, {
+      keyboard: {
+        bindTo: document
+      },
       additionalModules: [
-        ...Modeler.prototype._modules,
         TokenSimulationModelerModules
       ]
     }));
@@ -118,7 +120,7 @@ describe('modeler extension', function() {
       // then
       expect(
         elementSupport.getUnsupportedElements()
-      ).to.have.length(2);
+      ).to.have.length(1);
     }));
 
   });
